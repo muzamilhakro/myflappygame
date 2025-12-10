@@ -57,10 +57,10 @@ window.addEventListener('mousedown', enableAudioOnGesture, { once:true });
 
 // game state
 let bird = {
-  x: CANVAS_W / 5,
+  x: CANVAS_W / 6,
   y: CANVAS_H / 1,
-  width: 80,   // bigger
-  height: 80,  // bigger (better face visibility)
+  width: 82.5,   // bigger
+  height: 82.5,  // bigger (better face visibility)
   velY: 0
 };
 
@@ -310,3 +310,4 @@ window.addEventListener('touchstart', jumpHandler, { passive:false });
 // show console hint
 
 log('Files required: flappybirdbg.png, toppipe.png, bottompipe.png, bird.png, fart.png, fart.mp3');
+
