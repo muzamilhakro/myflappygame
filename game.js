@@ -65,9 +65,9 @@ let bird = {
 };
 
 // SLOWER + SMOOTHER physics
-const GRAVITY = 0.45;   // was 1
-const JUMP_V = -6.5;    // was -9
-const VELOCITY_X = -2.5; // was -4
+const GRAVITY = 0.38;   // was 1
+const JUMP_V = -7.1;    // was -9
+const VELOCITY_X = -2.0; // was -4
 
 
 let pipes = []; // array of {x,y,width,height,img,passed}
@@ -122,7 +122,7 @@ if (images.bird) {
 // create a pipe pair (top and bottom)
 function placePipes() {
   const randomPipeY = Math.floor(- pipeHeight/4 - Math.random() * (pipeHeight/2));
-  const openingSpace = Math.floor(CANVAS_H / 4);
+  const openingSpace = Math.floor(CANVAS_H / 3);
 
   const top = {
     img: images.topPipe,
@@ -196,12 +196,16 @@ function jumpHandler(evt) {
   playFart();
 }
 
-// collision detection (AABB)
+// collision detection with padding (easier gameplay)
 function collision(a, b) {
-  return (a.x < b.x + b.width &&
-          a.x + a.width > b.x &&
-          a.y < b.y + b.height &&
-          a.y + a.height > b.y);
+  const padding = 12; // smaller hitbox = easier
+
+  return (
+    a.x + padding < b.x + b.width &&
+    a.x + a.width - padding > b.x &&
+    a.y + padding < b.y + b.height &&
+    a.y + a.height - padding > b.y
+  );
 }
 
 // update physics
@@ -304,4 +308,5 @@ window.addEventListener('mousedown', jumpHandler);
 window.addEventListener('touchstart', jumpHandler, { passive:false });
 
 // show console hint
+
 log('Files required: flappybirdbg.png, toppipe.png, bottompipe.png, bird.png, fart.png, fart.mp3');
